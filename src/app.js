@@ -25,24 +25,30 @@ app.use(express.json());
 const loginRouter = require("./routers/login");
 const signupRouter = require("./routers/signup");
 const logoutRouter = require("./routers/logout");
+const readUserRouter = require("./routers/read_user");
+const updateUserRouter = require("./routers/update_user");
 const auth = require("./middleware/auth");
 
 app.use(loginRouter);
 app.use(signupRouter);
 app.use(logoutRouter);
+app.use(readUserRouter);
+app.use(updateUserRouter);
 
 app.get("/api", (req, res) => {
   res.status(200).send("Hello world!");
 });
 
 app.get("/api/authorize", auth, (req, res) => {
-  res.status(200).json({ message: "logged in", uid: req.id });
+  res.status(200).json({ message: "logged in", userData: { uid: req.id, name: req.name, email: req.email, pic: req.pic } });
 });
 
-io.on("connection", (socket) => {
+const connectedClients = {};
 
-  socket.on("came", (msg) => {
-    socket.broadcast.emit("message", msg);
+io.on("connection", (socket) => {
+  socket.on("send message", (msg, uid) => {
+    socket.join("652d644b705b175d96444e3b");
+    socket.to("652d644b705b175d96444e3b").emit("recieve message", msg);
   });
   socket.on("disconnect", () => {
     // console.log("a user disconnected");

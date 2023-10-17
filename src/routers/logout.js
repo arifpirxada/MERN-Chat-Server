@@ -3,7 +3,7 @@ const router = new express.Router()
 const auth = require('../middleware/auth')
 const user = require("../models/user")
 
-router.get("/logout", auth, async (req, res) => {
+router.get("/api/logout", auth, async (req, res) => {
     try {
         res.clearCookie("auth")
         await user.findByIdAndUpdate({ _id: req.id }, { $set: { token: "" } })

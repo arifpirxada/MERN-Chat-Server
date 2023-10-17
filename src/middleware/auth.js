@@ -7,13 +7,16 @@ async function auth(req, res, next) {
     const verify = jwt.verify(token, process.env.JWT_SECRET_KEY);
     const exists = await user.findOne({ token: token });
     if (!exists) {
-      return res.status(400).json({ message: "notLogged" });
+      return res.status(200).json({ message: "notLogged" });
     }
     req.id = verify.id;
     req.log = true;
+    req.name = exists.name
+    req.pic = exists.pic
+    req.email = exists.email
     next();
   } catch {
-    res.status(400).json({ message: "notLogged" });
+    res.status(200).json({ message: "notLogged" });
   }
 }
 
