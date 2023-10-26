@@ -12,14 +12,16 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
     password: {
-        type: String,
-        required: true
+        type: String
     },
     pic: {
         type: String
     },
     token: {
         type: String
+    },
+    google: {
+        type: Boolean
     }
 })
 

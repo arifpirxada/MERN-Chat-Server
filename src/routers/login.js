@@ -12,6 +12,10 @@ router.post("/api/login", async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
+    if (existingUser.google || existingUser.google === false) {
+      return res.status(400).json({ message: "Sign in with Google" });
+    }
+
     const passMatch = await bcrypt.compare(
       req.body.password,
       existingUser.password

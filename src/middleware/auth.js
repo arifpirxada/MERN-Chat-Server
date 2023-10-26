@@ -11,9 +11,11 @@ async function auth(req, res, next) {
     }
     req.id = verify.id;
     req.log = true;
-    req.name = exists.name
-    req.pic = exists.pic
-    req.email = exists.email
+    req.name = exists.name;
+    req.pic = exists.pic;
+    req.email = exists.email;
+    req.google = exists.google;
+    
     next();
   } catch {
     res.status(200).json({ message: "notLogged" });

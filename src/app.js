@@ -47,7 +47,7 @@ app.get("/api", (req, res) => {
 app.get("/api/authorize", auth, (req, res) => {
   res.status(200).json({
     message: "logged in",
-    userData: { uid: req.id, name: req.name, email: req.email, pic: req.pic },
+    userData: { uid: req.id, name: req.name, email: req.email, pic: req.pic, google: req.google},
   });
 });
 

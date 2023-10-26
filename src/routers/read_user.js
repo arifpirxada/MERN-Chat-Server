@@ -6,7 +6,7 @@ const fs = require("fs");
 router.get("/api/read-user/:uid", async (req, res) => {
   try {
     const uid = req.params.uid;
-    const suser = await user.find({ _id: uid }, { name: 1, pic: 1 });
+    const suser = await user.find({ _id: uid }, { name: 1, pic: 1, google: 1 });
     res.status(200).json(suser);
   } catch (e) {
     console.log(e);
@@ -18,7 +18,7 @@ router.get("/api/read-users/:skip", async (req, res) => {
   try {
     const skip = req.params.skip;
     const users = await user
-      .find({}, { name: 1, pic: 1 })
+      .find({}, { name: 1, pic: 1, google: 1 })
       .skip(skip)
       .limit(20)
       .sort({ _id: -1 });
@@ -44,7 +44,7 @@ router.get("/api/search/:query/:skip", async (req, res) => {
     const query = req.params.query;
     const skip = req.params.skip;
     const users = await user
-      .find({ name: { $regex: query, $options: "i" } }, { name: 1, pic: 1 })
+      .find({ name: { $regex: query, $options: "i" } }, { name: 1, pic: 1, google: 1 })
       .skip(skip)
       .limit(20);
     const num = await user

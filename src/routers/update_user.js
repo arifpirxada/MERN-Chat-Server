@@ -41,6 +41,10 @@ router.patch("/api/update-user-img", async (req, res) => {
         });
       }
 
+      if (existingUser.google && existingUser.google === true) {
+        existingUser.google = false;
+      }
+
       const contentTypeMap = [
         "image/png",
         "image/jpeg",
