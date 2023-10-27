@@ -6,8 +6,14 @@ const server = createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "https://verbula.netlify.app",
   },
+});
+
+// Middleware to log request headers
+io.use((socket, next) => {
+  console.log("Request Headers:", socket.handshake.headers);
+  next();
 });
 
 const port = process.env.PORT || 3000;
