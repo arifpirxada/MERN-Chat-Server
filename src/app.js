@@ -4,17 +4,7 @@ const { createServer } = require("http");
 
 const server = createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server, {
-  cors: {
-    origin: "https://verbula.netlify.app",
-  },
-});
-
-// Middleware to log request headers
-io.use((socket, next) => {
-  console.log("Request Headers:", socket.handshake.headers);
-  next();
-});
+const io = new Server(server);
 
 const port = process.env.PORT || 3000;
 const dotenv = require("dotenv");
@@ -24,6 +14,7 @@ require("./dbcon");
 
 const cookieParser = require("cookie-parser");
 
+app.use(express.static("./dist"))
 app.use(cookieParser());
 app.use(express.json());
 
