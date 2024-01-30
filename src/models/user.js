@@ -22,6 +22,9 @@ const userSchema = new mongoose.Schema({
     },
     google: {
         type: Boolean
+    },
+    otp: {
+        type: Number
     }
 })
 

@@ -28,6 +28,7 @@ const auth = require("./middleware/auth");
 const createMessage = require("./controlers/createMessage");
 const readMessage = require("./routers/readMessage");
 const createRecent = require("./routers/recentOper");
+const otpVerification = require("./routers/otpVerification");
 
 app.use(loginRouter);
 app.use(signupRouter);
@@ -36,6 +37,7 @@ app.use(readUserRouter);
 app.use(updateUserRouter);
 app.use(readMessage);
 app.use(createRecent);
+app.use(otpVerification);
 
 app.get("/api", (req, res) => {
   res.status(200).send("Hello world!");
@@ -44,7 +46,7 @@ app.get("/api", (req, res) => {
 app.get("/api/authorize", auth, (req, res) => {
   res.status(200).json({
     message: "logged in",
-    userData: { uid: req.id, name: req.name, email: req.email, pic: req.pic, google: req.google},
+    userData: { uid: req.id, name: req.name, email: req.email, pic: req.pic, google: req.google, otp: req.otp},
   });
 });
 

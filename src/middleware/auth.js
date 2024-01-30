@@ -15,6 +15,7 @@ async function auth(req, res, next) {
     req.pic = exists.pic;
     req.email = exists.email;
     req.google = exists.google;
+    req.otp = exists.otp;
     
     next();
   } catch {
