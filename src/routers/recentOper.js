@@ -47,7 +47,7 @@ router.get("/api/read-recent/:uid", async (req, res) => {
             _id: element,
           })),
         },
-        { name: 1, pic: 1 }
+        { name: 1, pic: 1, google: 1 }
       )
       .sort({ _id: -1 });
     res.status(200).json(recentUsers);
